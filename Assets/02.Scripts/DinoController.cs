@@ -50,12 +50,23 @@ public class DinoController : MonoBehaviour
         // 감지된 Collider들 처리
         foreach (Collider doors in hitColliders)
         {
+            if(doors.CompareTag("Goal"))
+            {
+                Debug.Log("Goal");
+                doors.gameObject.GetComponent<BoxCollider>().enabled = false; //문의 박스 콜라이더 끄기
+            }
+            else
+            {
+
             // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
             int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
             DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
 
+            doors.gameObject.GetComponent<BoxCollider>().enabled = false; //문의 박스 콜라이더 끄기
+
             // DinoPositionController 스크립트에서 적절하게 사칙연산에 맞게 계산 해야 한다.
             dinoPositionController.SetDoorCalc(doorType, doorNumber);
+            }
         }
     }
 
