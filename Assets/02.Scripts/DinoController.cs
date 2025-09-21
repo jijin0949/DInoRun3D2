@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DinoController : MonoBehaviour
 {
+    public static DinoController instance;
     public float moveSpeed;  // 얼마만큼 빠르게 움직이는지 스피드값
     public float moveSpeedX;  // x축 즉 좌우로 움직이는 스피드값
 
@@ -14,6 +15,17 @@ public class DinoController : MonoBehaviour
 
     public DinoPositionController dinoPositionController;
 
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         
@@ -21,8 +33,12 @@ public class DinoController : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.instance.isGameStart.Equals(true)) //게임이 시작했을 때만 달려나간다.
+        {
         DinoMove();
         DoorCheck();
+
+        }
     }
 
     private void DinoMove()
