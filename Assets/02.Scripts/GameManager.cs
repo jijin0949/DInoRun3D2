@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject gamePanel;
     public Slider progressBar;
 
+    public TextMeshProUGUI nowStageText;
+    public TextMeshProUGUI nextStageText;
 
     private void Awake()
     {
@@ -48,6 +51,11 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(true);
     }
 
+    public int GetStage()
+    {
+        return PlayerPrefs.GetInt("Stage", 1); //PlayerPrefs는 정수, 부동 소수점, 문자열을 저장할 수 있음. 데이터를 키 - 값 쌍으로 저장한다.
+    }
+
 
     void Start()
     {
@@ -55,6 +63,9 @@ public class GameManager : MonoBehaviour
         progressBar.value = 0f;  // 간 거리는 0으로 세팅
         titlePanel.SetActive(true); // Title Panel은 활성화
         gamePanel.SetActive(false); // GamePanel은 비활성화
+
+        nowStageText.text = MapManager.instance.GetStage().ToString();
+        nextStageText.text = (MapManager.instance.GetStage()+1).ToString();
     }
 
     void Update()

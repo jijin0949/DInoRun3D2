@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DinoController : MonoBehaviour
 {
@@ -68,8 +69,10 @@ public class DinoController : MonoBehaviour
         {
             if(doors.CompareTag("Goal"))
             {
-                Debug.Log("골인이야!");
+                //Debug.Log("골인!");
+                PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1); //현재 스테이지에서 1을 더하고 저장.    
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;   // door의 BoxCollider 비활성화
+                SceneManager.LoadScene(0); // 0번 씬을 로드
             }
             else
             {

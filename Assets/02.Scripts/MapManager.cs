@@ -76,4 +76,9 @@ public class MapManager : MonoBehaviour
         return goalObject.transform.position.z;
     }
 
+    public int GetStage()
+    {
+        return PlayerPrefs.GetInt("Stage", 1); //PlayerPrefs는 정수, 부동 소수점, 문자열을 저장할 수 있음. 데이터를 키 - 값 쌍으로 저장한다.
+    }
+
 }
