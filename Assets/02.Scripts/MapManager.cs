@@ -6,8 +6,10 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
     public GameObject[] mapPrefabs;
-    public GameObject[] testMApPrefabs;
-    public GameObject goalObject; //거리를 구하기 위한 오븢ㄷ트를 담기 위한 변수.
+
+    public GameObject[] testMapPrefabs;  // 테스트 위한 변수
+
+    public GameObject goalObject; // 거리를 구하기 위한 오브젝트를 담기 위한 변수.
 
     private void Awake()
     {
@@ -20,50 +22,52 @@ public class MapManager : MonoBehaviour
             instance = this;
         }
     }
+
     void Start()
     {
-        CreatTestMap();
         //CreatMap();
-        goalObject = GameObject.FindWithTag("Goal"); //Goal 오브젝트를 찾아서 대입해준다.
+        CtreatTestMap();
+        goalObject = GameObject.FindWithTag("Goal"); // Goal 오브젝트를 찾아서 대입해준다.
     }
 
-    private void CreatTestMap()
+    private void CtreatTestMap()
     {
-        Vector3 mapPosition = Vector3.zero;  // 초기 생성 위치는 원점으로 한다.
+        Vector3 mapPosition = Vector3.zero;
 
-        for (int i = 0; i < testMApPrefabs.Length; i++)
+        for (int i = 0; i < testMapPrefabs.Length; i++)
         {
-            GameObject selectedMap = testMApPrefabs[i];
-            
+            GameObject selectedMap = testMapPrefabs[i]; // 만들 Map을 순서대로 선택한다.
             if (i > 0)
             {
-
-                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;  // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
+                // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
+                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
             }
-            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity); // 현재 만들 맵을 생성한다.
-            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 생성된 Map의 길이의 반을 더한다.
+            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity);
+            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 선택된 Map의 길이의 반을 더한다.
         }
     }
 
+
+
     private void CreatMap()
     {
-        Vector3 mapPosition = Vector3.zero;  // 초기 생성 위치는 원점으로 한다.
+        Vector3 mapPosition = Vector3.zero;
 
-        for(int i = 0; i < mapPrefabs.Length; i++)
+        for (int i = 0; i < 5; i++)
         {
-            GameObject selectedMap;
+            GameObject selectedMap;     // 만들 Map을 선택한다.
             if (i > 0)
             {
-                selectedMap = mapPrefabs[Random.Range(0, mapPrefabs.Length)]; // 나머지는 랜덤
-                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;  // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
+                selectedMap = mapPrefabs[Random.Range(1, mapPrefabs.Length)]; ;
+                // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
+                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
             }
             else
             {
-                selectedMap = mapPrefabs[0]; // 첫 번째 맵은 고정
-
+                selectedMap = mapPrefabs[0];
             }
-            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity); // 현재 만들 맵을 생성한다.
-            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 생성된 Map의 길이의 반을 더한다.
+            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity);
+            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 선택된 Map의 길이의 반을 더한다.
         }
     }
 
@@ -73,4 +77,3 @@ public class MapManager : MonoBehaviour
     }
 
 }
-

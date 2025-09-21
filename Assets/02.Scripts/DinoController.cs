@@ -26,6 +26,7 @@ public class DinoController : MonoBehaviour
             instance = this;
         }
     }
+
     void Start()
     {
         
@@ -33,11 +34,10 @@ public class DinoController : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.instance.isGameStart.Equals(true)) //게임이 시작했을 때만 달려나간다.
+        if (GameManager.instance.isGameStart.Equals(true))  // 게임이 시작 했을때만 달려간다
         {
-        DinoMove();
-        DoorCheck();
-
+            DinoMove();
+            DoorCheck();
         }
     }
 
@@ -68,20 +68,20 @@ public class DinoController : MonoBehaviour
         {
             if(doors.CompareTag("Goal"))
             {
-                Debug.Log("Goal");
-                doors.gameObject.GetComponent<BoxCollider>().enabled = false; //문의 박스 콜라이더 끄기
+                Debug.Log("골인이야!");
+                doors.gameObject.GetComponent<BoxCollider>().enabled = false;   // door의 BoxCollider 비활성화
             }
             else
             {
 
-            // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
-            int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
-            DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
+                // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
+                int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
+                DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
 
-            doors.gameObject.GetComponent<BoxCollider>().enabled = false; //문의 박스 콜라이더 끄기
+                doors.gameObject.GetComponent<BoxCollider>().enabled = false;   // door의 BoxCollider 비활성화
 
-            // DinoPositionController 스크립트에서 적절하게 사칙연산에 맞게 계산 해야 한다.
-            dinoPositionController.SetDoorCalc(doorType, doorNumber);
+                // DinoPositionController 스크립트에서 적절하게 사칙연산에 맞게 계산 해야 한다.
+                dinoPositionController.SetDoorCalc(doorType, doorNumber);
             }
         }
     }

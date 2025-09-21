@@ -7,14 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public bool isGameStart; //거짓이면 게임시작 아님, 참이면 게임시작
+    public bool isGameStart;  // false면 게임 시작 아님, true면 게임 시작
 
     public GameObject titlePanel;
     public GameObject gamePanel;
     public Slider progressBar;
+
+
     private void Awake()
     {
-        if(instance!= null)
+        if (instance != null)
         {
             Destroy(this.gameObject);
         }
@@ -23,13 +25,17 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-    public void SetDistanceProgressBar()
+
+    public void SetDistanceProgressBar()  //  프로그래스바 세팅하기 위한 함수
     {
-        if(isGameStart.Equals(false)) //게임시작 전에 실행되지 않도록 한다.
+        if (isGameStart.Equals(false))  // 게임이 시작하기 전에는 실행되지 않게 한다
         {
             return;
         }
-        float goalDistance = DinoController.instance.transform.position.z / MapManager.instance.GetGoalDistance(); //전체 거리 중에 공룡의 위치 거리 비율.
+
+        // 전체 거리중 Dino의 위치 거리 비율
+        float goalDistance = DinoController.instance.transform.position.z / MapManager.instance.GetGoalDistance();
+        //Debug.Log(goalDistance);
         progressBar.value = goalDistance;
     }
 
@@ -38,18 +44,19 @@ public class GameManager : MonoBehaviour
         Debug.Log("게임 시작");
         isGameStart = true;
         Time.timeScale = 1f;
-        titlePanel.SetActive(false); //버튼 비활성화
+        titlePanel.SetActive(false);
         gamePanel.SetActive(true);
     }
+
+
     void Start()
     {
-        Time.timeScale = 0f;//전체 시간을 멈춤.
-        progressBar.value = 0f; // 간 거리는 0으로 세팅
-        titlePanel.SetActive(true);
-        gamePanel.SetActive(false);
+        Time.timeScale = 0f;  // 전체 시간을 잠깐 멈춤
+        progressBar.value = 0f;  // 간 거리는 0으로 세팅
+        titlePanel.SetActive(true); // Title Panel은 활성화
+        gamePanel.SetActive(false); // GamePanel은 비활성화
     }
 
-    
     void Update()
     {
         SetDistanceProgressBar();
