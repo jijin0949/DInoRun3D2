@@ -170,7 +170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3381968197436844730, guid: 8701aa7e73d3f6d4c84c38a8497ebca8, type: 3}
       propertyPath: leftDoorNumber
-      value: 3
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381968197436844730, guid: 8701aa7e73d3f6d4c84c38a8497ebca8, type: 3}
+      propertyPath: rightDoorNumber
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4132962031576988102, guid: 8701aa7e73d3f6d4c84c38a8497ebca8, type: 3}
       propertyPath: m_Name

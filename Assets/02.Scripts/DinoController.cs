@@ -11,6 +11,7 @@ public class DinoController : MonoBehaviour
 
     // 구체의 중심이 될 위치
     public Vector3 sphereCenter;
+
     // 구체의 반지름
     public float sphereRadius = 0.5f;
 
@@ -74,7 +75,7 @@ public class DinoController : MonoBehaviour
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;   // door의 BoxCollider 비활성화
                 SceneManager.LoadScene(0); // 0번 씬을 로드
             }
-            else
+            else if(doors.gameObject.GetComponent<SelectDoors>() != null)
             {
 
                 // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서

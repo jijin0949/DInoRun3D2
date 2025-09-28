@@ -434,8 +434,8 @@ MonoBehaviour:
   titlePanel: {fileID: 901413833}
   gamePanel: {fileID: 1140760289}
   progressBar: {fileID: 1256301931}
-  nowStageText: {fileID: 0}
-  nextStageText: {fileID: 0}
+  nowStageText: {fileID: 937015717}
+  nextStageText: {fileID: 601022719}
 --- !u!4 &159395241
 Transform:
   m_ObjectHideFlags: 0
@@ -1668,22 +1668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e653cffb918deee4f9e1df98111c3885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabs:
-  - {fileID: 3022758452165357144, guid: 335579836135eaf449e817d5a411b9aa, type: 3}
-  - {fileID: 5723121240271127127, guid: e18714c7948ce4747b2ff62fd752ba37, type: 3}
-  - {fileID: 7770728962568544918, guid: 6fd4e02f8b57d7347ad2cb2c272f5ea5, type: 3}
-  - {fileID: 3022758452165357144, guid: ea029b73021182d45beb823e0a31ec2b, type: 3}
-  - {fileID: 7770728962568544918, guid: 6fd4e02f8b57d7347ad2cb2c272f5ea5, type: 3}
-  - {fileID: 5723121240271127127, guid: e18714c7948ce4747b2ff62fd752ba37, type: 3}
-  - {fileID: 3022758452165357144, guid: ea029b73021182d45beb823e0a31ec2b, type: 3}
-  - {fileID: 3022758452165357144, guid: 23f6e2540af58e241a22fe10e454991d, type: 3}
-  testMapPrefabs:
-  - {fileID: 3022758452165357144, guid: 335579836135eaf449e817d5a411b9aa, type: 3}
-  - {fileID: 5723121240271127127, guid: b91ced8f3e051c249b7eb5651f2d0745, type: 3}
-  - {fileID: 5723121240271127127, guid: e18714c7948ce4747b2ff62fd752ba37, type: 3}
-  - {fileID: 7770728962568544918, guid: 9dc7c70b490e3c04e9403901eae3e3c2, type: 3}
-  - {fileID: 3022758452165357144, guid: ea029b73021182d45beb823e0a31ec2b, type: 3}
-  - {fileID: 3022758452165357144, guid: 23f6e2540af58e241a22fe10e454991d, type: 3}
+  stages:
+  - {fileID: 11400000, guid: dbb0c8d940687c9408ee061263014d66, type: 2}
+  - {fileID: 11400000, guid: 10c9a45bb7b29d347b98c157787688e9, type: 2}
+  - {fileID: 11400000, guid: b21106fabc4d5584aa700f942e74af84, type: 2}
   goalObject: {fileID: 0}
 --- !u!4 &642367414
 Transform:
@@ -2555,6 +2543,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937015715}
   m_CullTransparentMesh: 1
+--- !u!1 &938890669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 938890671}
+  - component: {fileID: 938890670}
+  m_Layer: 0
+  m_Name: EnemyRaptors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &938890670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938890669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f87373a2e90b204b84f41b402b284c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRaptorPrefab: {fileID: 8913199547516205325, guid: ad8c192be9f0a484abd4bddb779cb0a7, type: 3}
+  enemyRaptorNumber: 5
+  initialRadius: 0
+  radiusGrowth: 0.12
+  angleIncrement: 137.508
+--- !u!4 &938890671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938890669}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,6 +4612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raptor
       objectReference: {fileID: 0}
+    - target: {fileID: 731938985167023234, guid: 2816e1155ac93704fab7b2bf82104239, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3219759689264775766, guid: 2816e1155ac93704fab7b2bf82104239, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4635,3 +4676,4 @@ SceneRoots:
   - {fileID: 1837120295}
   - {fileID: 903772113}
   - {fileID: 934458572}
+  - {fileID: 938890671}

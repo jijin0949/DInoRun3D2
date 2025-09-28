@@ -5,9 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
-    public GameObject[] mapPrefabs;
-
-    public GameObject[] testMapPrefabs;  // 테스트 위한 변수
+    public StageScriptableObject[] stages; // 스크랩터블 오브젝트로 만든 데이터를 담기 위한 변수.
 
     public GameObject goalObject; // 거리를 구하기 위한 오브젝트를 담기 위한 변수.
 
@@ -22,52 +20,42 @@ public class MapManager : MonoBehaviour
             instance = this;
         }
     }
+    public int GetStage()
+    {
+        return PlayerPrefs.GetInt("Stage", 1); //PlayerPrefs는 정수, 부동 소수점, 문자열을 저장할 수 있음. 데이터를 키 - 값 쌍으로 저장한다.
+    }
 
     void Start()
     {
         //CreatMap();
-        CtreatTestMap();
+        CreateStage();
         goalObject = GameObject.FindWithTag("Goal"); // Goal 오브젝트를 찾아서 대입해준다.
     }
 
-    private void CtreatTestMap()
+   
+    public void CreateStage()
     {
-        Vector3 mapPosition = Vector3.zero;
+        int currentStageIndex = GetStage();
+        currentStageIndex = currentStageIndex % stages.Length;
+        StageScriptableObject stage = stages[currentStageIndex];
 
-        for (int i = 0; i < testMapPrefabs.Length; i++)
-        {
-            GameObject selectedMap = testMapPrefabs[i]; // 만들 Map을 순서대로 선택한다.
-            if (i > 0)
-            {
-                // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
-                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
-            }
-            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity);
-            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 선택된 Map의 길이의 반을 더한다.
-        }
+        CreatMap(stage.maps);
     }
 
 
-
-    private void CreatMap()
+    private void CreatMap(Map[] stageMaps)
     {
         Vector3 mapPosition = Vector3.zero;
 
-        for (int i = 0; i < 5; i++)
+        for(int i =0; i<stageMaps.Length; i++)
         {
-            GameObject selectedMap;     // 만들 Map을 선택한다.
-            if (i > 0)
+            Map selectedMap = stageMaps[i];
+            if(i>0)
             {
-                selectedMap = mapPrefabs[Random.Range(1, mapPrefabs.Length)]; ;
-                // 2번째 Map에서부터 이전의 Map의 크기의 반을 더해준다.
-                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
+                mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2; 
             }
-            else
-            {
-                selectedMap = mapPrefabs[0];
-            }
-            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity);
-            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;    //현재 선택된 Map의 길이의 반을 더한다.
+            Map nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity, transform);
+            mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2;
         }
     }
 
@@ -76,9 +64,5 @@ public class MapManager : MonoBehaviour
         return goalObject.transform.position.z;
     }
 
-    public int GetStage()
-    {
-        return PlayerPrefs.GetInt("Stage", 1); //PlayerPrefs는 정수, 부동 소수점, 문자열을 저장할 수 있음. 데이터를 키 - 값 쌍으로 저장한다.
-    }
 
 }
