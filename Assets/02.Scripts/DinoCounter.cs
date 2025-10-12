@@ -11,5 +11,11 @@ public class DinoCounter : MonoBehaviour
     void Update()
     {
         dinoCountText.text = dinosParent.childCount.ToString();
+        
+        if(dinosParent.childCount <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
+
     }
 }
