@@ -6,18 +6,18 @@ public class Enemy : MonoBehaviour
 {
     enum State
     {
-        Idle, //대기 상태에서는 애니메이션 멈춤
-        Run // 랩터에게 달려오는 상태
+        Idle, // 대기 상태에서는 애니메이션 작동 멈춤
+        Run // Raptor에게 달려오는 상태
     }
 
-    public float moveSpeed;//달려오는 속도
-    public float detectRadius;//감지되는 범위의 반지름
-    private State state;//적의 상태를 나타낼 변수
-    private Transform targetRaptor;//우리의 랩터
+    public float moveSpeed;  // 달려오는 스피드
+    public float detectRadius;  // 감지되는 범위의 반지름 
+    private State state;    // Enemy의 상태를 나타낼 변수
+    private Transform targetRaptor;  // 우리의 Raptor
 
     void Start()
     {
-        GetComponent<Animator>().speed = 0f;//애니메이션 시간을 0으로 세팅해줘 멈춰있게 함
+        GetComponent<Animator>().speed = 0f;  // 애니메이션의 시간을 0으로 세팅해줘 멈춰 있게 함
     }
 
     void Update()
@@ -27,59 +27,61 @@ public class Enemy : MonoBehaviour
 
     private void SetState()
     {
-        switch(state)
+        switch (state)
         {
             case State.Idle:
                 DetectDino();
                 break;
 
             case State.Run:
-                GoTODino();
+                GoToDino();
                 break;
-
         }
     }
 
-    private void DetectDino() //디노를 찾고 있는 함수. 업데이트에서 항상 작동 중
+    private void DetectDino() // Dino를 찾고 있는 함수, 항상 Update에서 작동 되고 있음.
     {
+        // 구체 영역 내의 Collider들을 감지
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectRadius);
 
-        foreach(Collider colls in hitColliders) // 감지된 Collider들을 감지
+        // 감지된 Collider들 처리
+        foreach (Collider colls in hitColliders)
         {
-           //검색된 곳에 디노가 있다면
-            if(colls.gameObject.GetComponent<Raptor>()!=null)
+            // 검색된 곳에  Dino가 있다면
+            if (colls.gameObject.GetComponent<Raptor>() != null)
             {
-                if (colls.gameObject.GetComponent<Raptor>().IsTarget())
+                if (colls.gameObject.GetComponent<Raptor>().IsTarget()) // 이미 타겟으로 지정되어 있다면, 다음 충돌 오브젝트로
                     continue;
 
-                    colls.gameObject.GetComponent<Raptor>().SetTarget();//충돌 오브젝트에 타겟으로 지정됐다고 스위치 키기
+                colls.gameObject.GetComponent<Raptor>().SetTarget();  // 충돌 오브젝트에 타겟으로 지정됐다고 스위치 켜주고
 
-                    targetRaptor = colls.gameObject.transform; //충돌 오브젝트를 targetRaptor로 지정해줌
-                    StartGoTODino(); //상태 바꿔주는 함수 실행
-                
+                targetRaptor = colls.gameObject.transform;   // 충돌 오브젝트를 targetRaptor로 지정해줌
+
+                Debug.Log("StartGotoDino실행 전");
+                StartGotoDino();  // 상태 바꿔주는 함수 실행
             }
         }
     }
 
-    private void StartGoTODino()//찾았을 때 작동하는 함수
+    private void StartGotoDino()  // 찾았을 때 작동하는 함수
     {
-        state = State.Run;
-        GetComponent<Animator>().speed = 1f;
+        state = State.Run;  // 상태를 Run으로 바꿔줌
+        GetComponent<Animator>().speed = 1f;  // 애니메이션의 시간을 원래 시간으로 세팅 해줌
     }
 
-    private void GoTODino()//찾고난 후 디노에게 달려가는 함수
+    private void GoToDino()  // 찾고난 후 Dino에게 달려가는 함수
     {
-        if(targetRaptor == null)
+        if (targetRaptor == null)  // 타겟이 없으면 작동하지 않음.
         {
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetRaptor.position, Time.deltaTime * moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, targetRaptor.position, Time.deltaTime * moveSpeed); //Raptor를 향헤 감.  
 
-        if(Vector3.Distance(transform.position, targetRaptor.position) < 0.1f)
+        if (Vector3.Distance(transform.position, targetRaptor.position) < 0.1f)  // targetRaptor와 거리가 0.1보다 작아졌다면
         {
-            Destroy(targetRaptor.gameObject);
-            Destroy(this.gameObject);
+            Destroy(targetRaptor.gameObject);  // targetRaptor 삭제
+            Destroy(this.gameObject);  // Enemy인 나 자신도 삭제
         }
     }
 }

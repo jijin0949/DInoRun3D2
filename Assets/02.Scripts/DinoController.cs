@@ -11,7 +11,6 @@ public class DinoController : MonoBehaviour
 
     // 구체의 중심이 될 위치
     public Vector3 sphereCenter;
-
     // 구체의 반지름
     public float sphereRadius = 0.5f;
 
@@ -70,14 +69,13 @@ public class DinoController : MonoBehaviour
         {
             if(doors.CompareTag("Goal"))
             {
-                //Debug.Log("골인!");
-                PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1); //현재 스테이지에서 1을 더하고 저장.    
+                //Debug.Log("골인이야!");
+                PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1);  // 현재 Stage에서 1 더하고 저장 (다음 스테이지의 숫자를 저장하는 것)
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;   // door의 BoxCollider 비활성화
-                SceneManager.LoadScene(0); // 0번 씬을 로드
+                SceneManager.LoadScene(0);   // 0번 씬(현재 씬)을 로드
             }
             else if(doors.gameObject.GetComponent<SelectDoors>() != null)
             {
-
                 // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
                 int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
                 DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);

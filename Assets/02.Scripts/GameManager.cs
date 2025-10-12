@@ -51,11 +51,6 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(true);
     }
 
-    public int GetStage()
-    {
-        return PlayerPrefs.GetInt("Stage", 1); //PlayerPrefs는 정수, 부동 소수점, 문자열을 저장할 수 있음. 데이터를 키 - 값 쌍으로 저장한다.
-    }
-
 
     void Start()
     {
@@ -65,7 +60,9 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(false); // GamePanel은 비활성화
 
         nowStageText.text = MapManager.instance.GetStage().ToString();
-        nextStageText.text = (MapManager.instance.GetStage()+1).ToString();
+        nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
+
+
     }
 
     void Update()

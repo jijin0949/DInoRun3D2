@@ -393,8 +393,8 @@ GameObject:
   - component: {fileID: 1489093018747857885}
   - component: {fileID: 6385176425432051735}
   - component: {fileID: 4354618556627683026}
-  - component: {fileID: 5322656944661222712}
-  - component: {fileID: 2263537344886679535}
+  - component: {fileID: 3772496018685271656}
+  - component: {fileID: 4249854797477249522}
   m_Layer: 0
   m_Name: Raptor
   m_TagString: Untagged
@@ -577,7 +577,7 @@ MonoBehaviour:
   deathClips:
   - {fileID: 8300000, guid: 399d4fa3cddfd664cb117049933b2554, type: 3}
   - {fileID: 8300000, guid: 655ae2339de0ea14c8adefdcb28e2ffa, type: 3}
---- !u!114 &5322656944661222712
+--- !u!114 &3772496018685271656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,10 +586,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 731938985167023234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b9c0725ac421f4fa32e2b29120b116, type: 3}
+  m_Script: {fileID: 11500000, guid: 553c018b67fd6154aa892305c64ce6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &2263537344886679535
+--- !u!135 &4249854797477249522
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

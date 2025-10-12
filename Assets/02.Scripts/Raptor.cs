@@ -5,12 +5,13 @@ using UnityEngine;
 public class Raptor : MonoBehaviour
 {
     private bool isTarget;
+
     void Start()
     {
-        
+
     }
 
-  public void SetTarget()
+    public void SetTarget()
     {
         isTarget = true;
     }
